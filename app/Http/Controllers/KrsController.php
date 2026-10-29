@@ -13,11 +13,10 @@ class KrsController extends Controller
             'semester' => 'Semester', 'sks' => 'Total SKS',
             'status' => 'Status',
         ];
-
-        $mahasiswa = [
-            ['nim' => 22 ,'2401001', 'nama' => 'Ahmad Fauzi', 'semester' => 2,
-             'sks' => '', 'status' => 'Disetujui'],
-            ['nim' => 20, '2401002', 'nama' => 'Siti Rahmawati', 'semester' => 2,
+        $krs = [
+            ['nim' => '2401001', 'nama' => 'Ahmad Fauzi', 'semester' => 2,
+             'sks' => 22, 'status' => 'Disetujui'],
+            ['nim' => '2401002', 'nama' => 'Siti Rahmawati', 'semester' => 2,
              'sks' => 24 , 'status' => 'Disetujui'],
             ['nim' => '2301005', 'nama' => 'Budi Santoso', 'semester' => 4,
              'sks' => 24 , 'status' => 'Menunggu'],
@@ -26,7 +25,6 @@ class KrsController extends Controller
             ['nim' => '2201020', 'nama' => 'Rizky Pratama', 'semester' => 4,
              'sks' => 20 , 'status' => 'Menunggu'],
         ];
-
-        return view('mahasiswa.index', compact('kolom', 'mahasiswa'));
+        return view('krs.index', compact('kolom', 'krs'));
     }
 }

@@ -12,11 +12,13 @@ class DashboardController extends Controller
             ['judul' => "Mahasiswa",'jumlah' => 1250,
             'ikon' => 'bi-mortarboard-fill','warna' => 'primary'],
             ['judul' => "Dosen",'jumlah' => 68,
-            'ikon' => 'bi-mperson-badge-fill','warna' => 'succes'],
+            'ikon' => 'bi-person-badge-fill','warna' => 'success'],
             ['judul' => "Mata Kuliah",'jumlah' => 94,
             'ikon' => 'bi-book-fill','warna' => 'warning'],
             ['judul' => "KRS Aktif",'jumlah' => 842,
             'ikon' => 'bi-journal-check','warna' => 'info'],
+            ['judul' => 'Rata-rata SKS per KRS', 'jumlah' => 21, 
+            'ikon' => 'bi-calculator-fill', 'warna' => 'danger'],
             
         ];
         $kolomKrs = [
@@ -36,7 +38,7 @@ class DashboardController extends Controller
             'sks' => 21, 'status' => 'Disetujui'],
         ];
         $statusKrs = [
-            ['label' => 'Disetujui','persen' => 70,'warna'=> 'succes'],
+            ['label' => 'Disetujui','persen' => 70,'warna'=> 'success'],
             ['label' => 'Menunggu','persen' => 22,'warna'=> 'warning'],
             ['label' => 'Ditolak','persen' => 8,'warna'=> 'danger'],
         ];

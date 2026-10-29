@@ -1,5 +1,5 @@
 <form action="#" method="post">
-    @csrf
+    <!-- @csrf -->
     <div class="row g-3">
         <div class="col-md-4">
             <x-form-input label="NIM" name="nim" />

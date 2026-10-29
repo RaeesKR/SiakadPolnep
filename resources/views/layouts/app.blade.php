@@ -18,6 +18,7 @@
             @include('layouts.partials.sidebar')
 
             <main class="col-lg-9 col-xl-10 px-3 px-md-4 py-4">
+                @include('layouts.partials.flash')
                 @yield('content')
 
                 <footer class="text-center text-body-secondary small mt-5">
@@ -29,6 +30,37 @@
     </div>
     <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}">
     </script>
+    @push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const btnTheme = document.getElementById('btn-theme');
+            const htmlEl = document.documentElement;
+            const themeIcon = document.getElementById('theme-icon');
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            htmlEl.setAttribute('data-bs-theme', savedTheme);
+            updateIcon(savedTheme);
+
+            if (btnTheme) {
+                btnTheme.addEventListener('click', function () {
+                    let currentTheme = htmlEl.getAttribute('data-bs-theme');
+                    let newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+                    // Ubah atribut data-bs-theme pada elemen <html>
+                    htmlEl.setAttribute('data-bs-theme', newTheme);
+                    localStorage.setItem('theme', newTheme);
+                    updateIcon(newTheme);
+                });
+            }
+            function updateIcon(theme) {
+                if (theme === 'dark') {
+                    if (themeIcon) themeIcon.className = 'bi bi-moon-fill';
+                } else {
+                    if (themeIcon) themeIcon.className = 'bi bi-sun-fill';
+                }
+            }
+        });
+    </script>
+    @endpush
     @stack('scripts')
 </body>
 </html>

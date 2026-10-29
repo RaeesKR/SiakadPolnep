@@ -1,10 +1,12 @@
-<nav class="navbar navbar-dark bg-primary sticky-top shadow-sm">
+<nav class="navbar navbar-dark bg-secondary sticky-top shadow-sm">
     <div class="container-fluid">
         <div class="d-flex align-items-center">
-            <button class="navbar-toggler d-lg-none me-2" type="button"
-                    data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu"
-                    aria-controls="sidebarMenu" aria-label="Buka menu">
+            <button class="navbar-toggler d-lg-none me-2" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-label="Buka menu">
                 <span class="navbar-toggler-icon"></span>
+            </button>
+            <button class="btn btn-outline-light me-2" id="btn-theme" type="button">
+                <i class="bi bi-sun-fill" id="theme-icon"></i>
             </button>
             <a class="navbar-brand fw-semibold" href="{{ route('dashboard') }}">
                 <i class="bi bi-mortarboard-fill me-1"></i>
@@ -13,15 +15,29 @@
         </div>
 
         <div class="dropdown">
-            <button class="btn btn-primary dropdown-toggle" type="button"
-                    data-bs-toggle="dropdown" aria-expanded="false">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
                 <i class="bi bi-person-circle"></i>
-                <span class="d-none d-sm-inline">Administrator</span>
+                <span class="d-none d-sm-inline">{{ Auth::user()->name }}</span>
             </button>
             <ul class="dropdown-menu dropdown-menu-end">
-                <li><span class="dropdown-item-text small">Akun contoh</span></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item disabled" href="#">Keluar</a></li>
+                <li>
+                    <span class="dropdown-item-text small">
+                        {{ Auth::user()->email }}
+                        <span class="badge text-bg-secondary ms-1">{{ Auth::user()->role }}</span>
+                    </span>
+                </li>
+                <li>
+                    <hr class="dropdown-divider">
+                </li>
+                <li>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="dropdown-item text-danger">
+                            <i class="bi bi-box-arrow-right me-1"></i> Keluar
+                        </button>
+                    </form>
+                </li>
             </ul>
         </div>
     </div>

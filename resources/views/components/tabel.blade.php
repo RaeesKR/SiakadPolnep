@@ -28,6 +28,10 @@
                                 <span class="badge text-bg-{{ $warna }}">
                                     {{ $item[$kunci] }}
                                 </span>
+                            @elseif ($kunci === 'nim')
+                                <a href="{{ route('mahasiswa.show', $item[$kunci]) }}" class="text-decoration-none fw-semibold">
+                                    {{ $item[$kunci] }}
+                                </a>
                             @else
                                 {{ $item[$kunci] }}
                             @endif
@@ -36,8 +40,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="{{ count($kolom) + 1 }}"
-                        class="text-center text-body-secondary py-4">
+                    <td colspan="{{ count($kolom) + 1 }}" class="text-center text-body-secondary py-4">
                         Belum ada data.
                     </td>
                 </tr>

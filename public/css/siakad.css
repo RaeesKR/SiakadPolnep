@@ -1,3 +1,4 @@
+/* Sidebar menempel di bawah navbar pada layar lebar */
 @media (min-width: 992px) {
     .sidebar-col {
         position: sticky;
@@ -7,6 +8,8 @@
         overflow-y: auto;
     }
 }
+
+/* Kartu statistik sedikit terangkat saat disorot */
 .stat-card {
     transition: transform .15s ease, box-shadow .15s ease;
 }
