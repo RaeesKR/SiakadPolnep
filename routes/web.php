@@ -12,15 +12,16 @@ use App\Http\ControllersPenggunaController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
+    Route::get('/', fn () => redirect()->route('dashboard'));
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [LoginController::class, 'authenticate'])->name('login.attempt');
 });
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'historyback'])->group(function () {
 
     Route::get('/', fn () => redirect()->route('dashboard'));
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/mahasiswa', [MahasiswaController::class, 'index'])->name('mahasiswa.index');
-    Route::get('/dosen', [DosenController::class, 'index'])->name('dosen.index');
+    Route::get('/dosen/data', [DosenController::class, 'data'])->name('dosen.data');
     Route::get('/mata-kuliah', [MataKuliahController::class, 'index'])->name('matakuliah.index');
     Route::get('/krs', [KrsController::class, 'index'])->name('krs.index');
     Route::get('/beranda', [BerandaController::class, 'index'])->name('beranda');
@@ -29,5 +30,10 @@ Route::middleware('auth')->group(function () {
         ->middleware('role:admin')
         ->name('pengguna.index');
     Route::post('/logout', [LoginController::class,'logout'])->name('logout');
-
+    Route::middleware('role:admin')->group(function () {
+        Route::resource('dosen', DosenController::class)
+        ->except(['index','show']);
+    });
+    Route::resource('dosen', DosenController::class)
+        ->only(['index','show']);
 });

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\historyBack;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -14,7 +15,11 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->redirectGuestsTo(fn() => route('login'));
         $middleware->redirectUsersTo(fn() => route('dashboard'));
-        $middleware->alias(['role' => EnsureUserHasRole::class,]);
+        $middleware->alias([
+            'role' => EnsureUserHasRole::class,
+            'historyback' => historyBack::class,
+        ]);
+        
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

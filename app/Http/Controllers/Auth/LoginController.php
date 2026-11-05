@@ -31,11 +31,14 @@ class LoginController extends Controller
             $pesan = "Terlalu banyak percobaan login, Coba lagi dalam {$detik} detik";
             return back()->with('error',$pesan)->onlyInput('email');
         }
-        if (Auth::attempt($credentials,$request->boolean('remember'))) {
+        if (Auth::attempt($credentials, $request->boolean('remember'))) {
             RateLimiter::clear($key);
             $request->session()->regenerate();
+            Auth::user()->update([
+                'last_login_at' => now(),
+            ]);
             $pesan = 'Login berhasil. Selamat Datang, ' . Auth::user()->name . '.';
-            return redirect()->intended(route('dashboard'))->with('success',$pesan);
+            return redirect()->intended(route('dashboard'))->with('success', $pesan);
         }
         RateLimiter::hit($key,60);
         return back()

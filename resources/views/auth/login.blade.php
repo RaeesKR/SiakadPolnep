@@ -24,8 +24,20 @@
                 </div>
 
                 <div class="mb-3">
-                    <x-form-input label="Kata Sandi" name="password" type="password"
-                        autocomplete="current-password" required />
+                    <label for="password" class="form-label">Kata Sandi</label>
+                    <div class="input-group">
+                        <input type="password" id="password" name="password"
+                            class="form-control @error('password') is-invalid @enderror"
+                            autocomplete="current-password" required>
+                        <button class="btn btn-outline-secondary" type="button"
+                            data-toggle-password="password"
+                            aria-label="Tampilkan kata sandi">
+                            <i class="bi bi-eye-slash" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    @error('password')
+                        <div class="invalid-feedback d-block">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="form-check mb-3">
@@ -39,3 +51,31 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const toggleButtons = document.querySelectorAll('[data-toggle-password]');
+
+        toggleButtons.forEach(function (button) {
+            button.addEventListener('click', function () {
+                const inputId = this.getAttribute('data-toggle-password');
+                const passwordInput = document.getElementById(inputId);
+                if (!passwordInput) {
+                    return;
+                }
+                const isPassword = passwordInput.type === 'password';
+                passwordInput.type = isPassword ? 'text' : 'password';
+                const icon = this.querySelector('i');
+                if (icon) {
+                    icon.className = isPassword ? 'bi bi-eye' : 'bi bi-eye-slash';
+                }
+                this.setAttribute(
+                    'aria-label',
+                    isPassword ? 'Sembunyikan kata sandi' : 'Tampilkan kata sandi'
+                );
+            });
+        });
+    });
+</script>
+@endpush
