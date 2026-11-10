@@ -9,7 +9,7 @@
     <link href="{{ asset('css/siakad.css') }}" rel="stylesheet">
 </head>
 <body class="bg-body-tertiary">
-    <main class="container min-vh-100 py-4 d-flex align-items-center justify-conteny-center">
+    <main class="container min-vh-100 py-4 d-flex align-items-center justify-content-center">
         <div class="w-100" style="max-width: 420px">
             @yield('content')
         </div>
